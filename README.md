@@ -27,13 +27,16 @@ Step 7: Save and run the application.
 
 
 ## PROGRAM:
+
 /*
 Program to print the text “GalleryControl”.
 Developed by: Reethika
 Registeration Number : 212221040120
 */
 
-activity_main.xml
+Activity_main.xml
+
+
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
