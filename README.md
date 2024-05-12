@@ -71,47 +71,44 @@ activity_main.xml
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 MainActivity.java
-package com.example.gallery_control;
+
+package com.example.galleryview;
 
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Gallery;
 import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
     Gallery simpleGallery;
     CustomizedGalleryAdapter customGalleryAdapter;
     ImageView selectedImageView;
-
-    int[] images = {
-            R.drawable.india,
-            R.drawable.china,
-            R.drawable.australia,
-            R.drawable.america
-    };
-
+    int[] images = {R.drawable.india, R.drawable.china,R.drawable.australia,R.drawable.america};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         simpleGallery = (Gallery) findViewById(R.id.languagesGallery);
-
         selectedImageView = (ImageView) findViewById(R.id.imageView);
-
         customGalleryAdapter = new CustomizedGalleryAdapter(getApplicationContext(), images);
-
         simpleGallery.setAdapter(customGalleryAdapter);
-
-        simpleGallery.setOnItemClickListener((parent, view, position, id) -> {
-            selectedImageView.setImageResource(images[position]);
+        simpleGallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedImageView.setImageResource(images[position]);
+            }
         });
     }
 }
+
 CustomizedGalleryAdapter.java
-package com.example.gallery_control;
+
+package com.example.galleryview;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,36 +117,27 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 
 public class CustomizedGalleryAdapter extends BaseAdapter {
-
-    private final Context context;
-    private final int[] images;
-
+    private Context context;
+    private int[] images;
     public CustomizedGalleryAdapter(Context c, int[] images) {
         context = c;
         this.images = images;
     }
-
     public int getCount() {
         return images.length;
     }
-
     public Object getItem(int position) {
         return position;
     }
-
     public long getItemId(int position) {
         return position;
     }
-
     public View getView(int position, View convertView, ViewGroup parent) {
-
         ImageView imageView = new ImageView(context);
-
         imageView.setImageResource(images[position]);
-
         imageView.setLayoutParams(new Gallery.LayoutParams(200, 200));
         return imageView;
-    }
+}
 }
 
 
